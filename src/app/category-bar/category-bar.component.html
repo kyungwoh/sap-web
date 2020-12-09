@@ -1,0 +1,15 @@
+<div class="category-list">
+  <div class="category-item">
+    <a [routerLink]="['/']">
+      <h1>Home</h1>
+    </a>
+  </div>
+  <div *ngFor="let category of categories" class="category-item">
+    <a [routerLink]="['/category/' + category.categoryId]">
+      <h1>{{ category.categoryName }}</h1>
+    </a>
+  </div>
+  <div class="category-item">
+    <label style="color:white"><input type="checkbox" />Cache</label>
+  </div>
+</div>

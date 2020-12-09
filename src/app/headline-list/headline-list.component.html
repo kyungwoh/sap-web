@@ -1,0 +1,7 @@
+<h1 style="margin: 10px 10px 5px 10px;">Headlines</h1>
+<div class="headline-list">
+  <div *ngFor="let headline of headlines" class="headline-item">
+    <h3>{{ headline.postTitle }}</h3>
+    {{ headline.postContent | slice:0:150 }}
+  </div>
+</div>
