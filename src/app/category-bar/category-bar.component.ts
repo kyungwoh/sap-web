@@ -8,17 +8,11 @@ import { Category, BlogService } from './../service/blog.service';
   providers: [ BlogService ]
 })
 export class CategoryBarComponent implements OnInit {
-  categories : Category[] = [];
-  blogCache = false;
+  categories: Category[] = [];
 
   constructor(private blogService: BlogService) { }
 
-  ngOnInit() {
-    if (window.localStorage.getItem('blogCache')) this.blogCache = true;
-    console.log(this.blogCache);
-    // window.localStorage.setItem('blogCache', 'true');
-    // window.localStorage.removeItem('blogCache');
-
+  ngOnInit(): void {
     this.blogService.getCategories()
     .subscribe(
       (categories: Category[]) => { this.categories = categories; },

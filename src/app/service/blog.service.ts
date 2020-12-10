@@ -36,7 +36,29 @@ export class BlogService {
     return this.http.get<Category[]>(this.apiUrl + 'categories');
   }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.apiUrl + 'posts');
+  getPosts(categoryId: string | null, cacheOn: boolean): Observable<Post[]> {
+    let param = '';
+    if (categoryId) {
+      param = '?categoryId=' + categoryId;
+    }
+    if (cacheOn) {
+      if (param) {
+        param += '&';
+      } else {
+        param = '?';
+      }
+      param += 'cacheOn=true';
+    }
+    return this.http.get<Post[]>(this.apiUrl + 'posts' + param);
+  }
+
+  getCacheOn(): boolean {
+    if (window.localStorage.getItem('blogCache')) { return true; }
+    else { return false; }
+  }
+
+  toggleCacheOn(): void {
+    if (this.getCacheOn()) { window.localStorage.removeItem('blogCache'); }
+    else { window.localStorage.setItem('blogCache', 'true'); }
   }
 }
